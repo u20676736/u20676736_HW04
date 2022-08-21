@@ -1,0 +1,53 @@
+﻿@using u20676736_HW04.Models
+@model List<Patient>
+@{
+    ViewBag.Title = "Order_Vaccine";
+}
+
+<h2>Order_Vaccine</h2>
+
+<body>
+    <header>
+        <header>
+            <nav class="navbar navbar-light bg-light justify-content-between px-3">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="./images/cinema_logo.svg"
+                             width="50"
+                             height="50"
+                             alt="" />
+                    </a>
+                    <a class="navbar-brand" href="cart.html">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span class="itemCount">0</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+    </header>
+    <div class="container my-5">
+
+        <h2 class="my-5">Order_Vaccine</h2>
+
+        <div class="container products-container">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Order No.</th>
+                        <th scope="col">Type Vaccine</th>
+                        <th scope="col">Quanity</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <!-- will be populated with javascript -->
+                <tbody id="table-body" class="table-body"></tbody>
+                <tfoot id="table-footer" class="table-footer"></tfoot>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</body>

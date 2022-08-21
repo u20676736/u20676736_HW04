@@ -1,0 +1,150 @@
+﻿@using u20676736_HW04.Models
+@model List<Patient>
+@{
+    ViewBag.Title = "Add_Patient";
+}
+
+<div class="well-sm">
+    <h3>Add_Patient</h3>
+</div>
+
+@{ var result = "";
+    var FullName = "";
+    var today = DateTime.Today;
+    if (IsPost)
+    {
+        var idnumber = Request["ID"];
+        var firstname = Request["FirstName"];
+        var lastname = Request["LastName"];
+        var address = Request["Address"];
+        var phone = Request["Phone"];
+        var covid = Request["Diagonosedw/Covid"];
+        var pregnant = Request["Pregnant"];
+        var sex = Request["Sex"];
+        var age = Request["Age"];
+        var dosage = Request["Dosage"];
+
+        var full = firstname.AsInt()
++ lastname.AsInt();
+
+        var tempData = idnumber+","+
+            firstname + ","
+            + lastname + ","
+            + address + ","
+            + phone + ","
+            + covid + ","
+            + pregnant + ","
+            + today + ","
+            + sex + ","
+            + age + ","
+            + dosage + ","
+            + Environment.NewLine;
+
+
+        var dataFile = Server.MapPath("~/App_Data/tempData.txt");
+        File.AppendAllText(@dataFile, tempData);
+        result = "Information saved.";
+        FullName = full.ToString();
+
+    }
+}
+<h1>Please Enter Patient Detials Here</h1>
+<div class="well-sm">
+    <form id="form1" method="post">
+        <div>
+            <table border="1" class="table table-bordered" style="width:500px;">
+                <tbody>
+                    <tr>
+                        <td><p>&nbsp;ID Number:&nbsp;</p></td>
+                        <td><p><input id="IDnum" name="IDnum" type="text" /></p></td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;First Name:&nbsp;</p></td>
+                        <td><p><input id="Fname" name="FirstName" type="text" /></p></td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Last Name:&nbsp;</p></td>
+                        <td><p><input id="Lname" name="LastName" type="text" /></p></td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Address:&nbsp;</p></td>
+                        <td>@Html.TextArea("Address", " ", new { @class = "form-control", id = "IdAddress", name = "Address" })</td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Phone Number:&nbsp;</p></td>
+                        <td><p><input id="phone" name="Phone" type="number" /></p></td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Have been diagonied with covid:&nbsp;</p></td>
+                        <td>
+                            @Html.CheckBox("Yes") Yes
+                            @Html.CheckBox("No") No
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tic which symptoms you had in the last week:</td>
+                        <td>
+                            @Html.CheckBox("Headache") Headache
+                            @Html.CheckBox("Pain areas") Pain areas
+                            @Html.CheckBox("Sore Throat") Sore thraot
+                            @Html.CheckBox("Coughing") Coughing
+                            @Html.CheckBox("Fever") Fever
+                            @Html.CheckBox("Fatigue") Fatigue
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Are you Pregnant:&nbsp;</p></td>
+                        <td>
+                            @Html.CheckBox("Yes") Yes
+                            @Html.CheckBox("No") No
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Sex:&nbsp;</p></td>
+                        <td>
+                            @Html.RadioButton("Gender", "Male", false, new { id = "male" }) Male
+                            @Html.RadioButton("Gender", "Female", false, new { id = "female" }) Female
+                            @Html.RadioButton("Gender", "Other", false, new { id = "female" }) Other
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p>&nbsp;Age:&nbsp;</p></td>
+                        <td><p><input id="age" name="Age" type="number" /></p></td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;Is this your first vaccine dosage?:&nbsp;</p></td>
+                        <td>
+                            <p>
+                                <select class="form-control" id="dosage" name="Dosage">
+                                    <option>Select Option</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><p>&nbsp;</p></td>
+                        <td><p><input type="submit" value="Submit" /></p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            @if (result != "")
+            {
+                <p>Result: @result</p><br>
+                <p><b>@FullName</b>Information has been saved</p>}
+        </div>
+    </form>
+</div>
